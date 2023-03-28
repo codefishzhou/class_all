@@ -64,7 +64,7 @@ const routes = [{
 }]
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'development' ? '' : '/qiankun-vue3-tabsPage-demo'),
+  history: createWebHistory(process.env.NODE_ENV === 'development' ? '' : ''),
   routes
 })
 
