@@ -19,6 +19,10 @@ export const menuDataList = [{
         path: '/app1/about',
     },
     {
+        title: 'App1 screen',
+        path: '/app1/screen',
+    },
+    {
         title: 'App2-User',
         path: '/app2/user',
     },

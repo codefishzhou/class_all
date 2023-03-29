@@ -11,6 +11,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "user" */ '../views/user.vue')
   },
   {
+    path: appPath + '/screen',
+    name: 'screen',
+    component: () => import( /* webpackChunkName: "user" */ '../views/screen.vue')
+  },
+  {
     path: '/empty',
     name: 'Empty',
     component: () => import( /* webpackChunkName: "empty" */ '../views/empty.vue')
