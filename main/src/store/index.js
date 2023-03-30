@@ -2,6 +2,7 @@ import {
   createStore
 } from 'vuex'
 import tabs from './module/tabs.js'
+import user from './module/user.js'
 
 
 export default createStore({
@@ -10,6 +11,7 @@ export default createStore({
   mutations: {},
   getters: {},
   modules: {
-    tabs
+    tabs,
+    user
   }
 })

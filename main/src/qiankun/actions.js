@@ -8,7 +8,8 @@ import {
 import store from '@/store/index'
 
 let initialState = reactive({
-  changeMicoTabsPath: {} // 微应用tab数据
+  changeMicoTabsPath: {}, // 微应用tab数据
+  token: 'to13798312',
 })
 
 // 全局状态
@@ -73,9 +74,15 @@ actions.onGlobalStateChange((newState) => {
         }
       }
       break;
-    default:
+      case 'token':{
+        console.log(store, 'store')
+        store.commit('user/changeToken', 'changeToken---changeToken')
+      } break
+    default:{
       initialState[key] = newState[key]
+      console.log(newState, 'newState')
       break;
+    }
     }
   }
 }, false)

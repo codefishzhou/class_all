@@ -32,6 +32,7 @@ function render(props = {}) {
     })
 
     router.beforeEach((to, _form, next) => {
+        console.log(store, 'store')
         if (_form.path !== '/') {
             if (to.path === '/empty') {
                 next()

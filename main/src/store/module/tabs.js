@@ -25,20 +25,21 @@ export default {
             getters,
             commit
         }, data) {
+            commit('PUSH_TABS_LIST', data)
             // 如果tab列表没有超出就直接push
-            if (getters.tabsList.length < pageTabMax) {
-                commit('PUSH_TABS_LIST', data)
-            } else {
-                ElMessageBox.confirm(
-                    '系统能同时存在最多' + pageTabMax + '个路由Tabs标签页,请删除不重要的Tabs后再跳转!',
-                    '提示', {
-                        showCancelButton: false,
-                        confirmButtonText: '确定',
-                        type: 'warning'
-                    }
-                ).then(() => {
-                    router.back()
-                })
+            // if (getters.tabsList.length < pageTabMax) {
+            //     commit('PUSH_TABS_LIST', data)
+            // } else {
+            //     ElMessageBox.confirm(
+            //         '系统能同时存在最多' + pageTabMax + '个路由Tabs标签页,请删除不重要的Tabs后再跳转!',
+            //         '提示', {
+            //             showCancelButton: false,
+            //             confirmButtonText: '确定',
+            //             type: 'warning'
+            //         }
+            //     ).then(() => {
+            //         router.back()
+            //     })
                 /* eslint-disable */
                 // if (window.alert('系统能同时存在最多' + pageTabMax + '个路由Tabs标签页,超出限制时将关闭第一个Tabs标签页!确定跳转并关闭首个Tabs标签页吗?')) {
                 //     // 否者超出了就删除第一个tab页  再push
@@ -74,7 +75,7 @@ export default {
                 //     commit('CLOSE_TABS_LIST', tabList)
                 //     commit('PUSH_TABS_LIST', data)
                 // }
-            }
+            // }
         },
         async closeTabsList({
             getters,
@@ -205,6 +206,7 @@ export default {
     mutations: {
         // 添加挂载微应用
         ['PUSH_INSTALL_MRICOAPP_MAP'](state, data) {
+            console.log(data, 'macro-app')
             state.installAppMap = data
         },
         // 添加活跃的tabs

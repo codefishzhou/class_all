@@ -1,77 +1,68 @@
 <template>
-  <el-container class="layout-box">
-    <el-header class="clearfix"></el-header>
-    <el-container class="layout-main">
-      <el-aside id="asideLeft" width="210px">
-        <el-menu
-          :uniqueOpened="true"
-          active-text-color="#ffd04b"
-          background-color="#545c64"
-          class="el-menu-vertical-demo"
-          text-color="#fff"
-          :default-active="$route.path + ''"
-          router
-        >
-          <template v-for="(item, index) in menuDataList" :key="index">
-            <el-menu-item :index="item.path" :title="item.title">
-              <i v-if="item.icon" :class="['iconfont', item.icon]"></i>
-              <template #title>
-                <span>{{ item.title }}</span>
-              </template>
-            </el-menu-item>
-          </template>
-        </el-menu>
-      </el-aside>
-      <el-main id="mainBox">
-        <div>主应用的已缓存的页面有: =====> {{ keepAliveList['iframe'] || '[暂无]' }}</div>
-        <tabs></tabs>
-        <div v-show="!$route.name" v-loading="appLoading" element-loading-text="加载页面中, 请稍后...">
-          <div
-            v-for="item in tabsList"
-            v-show="item.appName === activeTab.appName"
-            :key="item.appName"
-            :id="item.id"
-          ></div>
-        </div>
-
-        <!-- <div v-show="!$route.name" id="container"></div> -->
-        <div v-show="$route.name">
-          <router-view v-slot="{ Component }">
-            <keep-alive :include="keepAliveList['iframe'] || []">
-              <component :is="Component" />
-            </keep-alive>
-          </router-view>
-        </div>
-      </el-main>
-    </el-container>
-  </el-container>
+  <div class="w-full">
+    <schoolHead></schoolHead>
+    <div class="container mx-auto grid-cols-6 grid gap-2 pointer mt-10">
+      <div
+        class=""
+        v-for="menu in menuDataList"
+        :key="menu.name"
+        @click="changeTab(menu)"
+      >
+        {{ menu.title.slice(0, 10) }}
+      </div>
+    </div>
+    <router-view v-slot="{ Component }">
+      <keep-alive :include="keepAliveList['iframe'] || []">
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+    <div
+      v-show="!$route.name"
+      v-loading="appLoading"
+      element-loading-text="加载页面中, 请稍后..."
+    >
+      <div
+        v-for="item in tabsList"
+        v-show="item.appName === activeTab.appName"
+        :key="item.appName"
+        :id="item.id"
+      ></div>
+    </div>
+  </div>
 </template>
 
 <script>
-
-import tabs from './tabs.vue'
-import { menuDataList } from '@/menuData/index.js'
-import { mapGetters } from 'vuex'
+import tabs from "./tabs.vue";
+import { menuDataList } from "@/menuData/index.js";
+import schoolHead from "./header.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     tabs,
+    schoolHead,
   },
   data() {
     return {
       menuDataList,
-    }
+    };
   },
   computed: {
     ...mapGetters({
-      keepAliveList: 'tabs/keepAliveList',
-      activeTab: 'tabs/activeTab',
-      tabsList: 'tabs/tabsList',
-      appLoading: 'tabs/appLoading',
+      keepAliveList: "tabs/keepAliveList",
+      activeTab: "tabs/activeTab",
+      tabsList: "tabs/tabsList",
+      appLoading: "tabs/appLoading",
     }),
   },
   setup() {},
-}
+  methods: {
+    changeTab(item) {
+      console.log(item);
+      this.$router.push(item.path);
+    },
+  },
+};
 </script>
 
 <style lang="scss" sopced>
