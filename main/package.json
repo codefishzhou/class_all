@@ -43,8 +43,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "vue/no-unused-vars": 0, 
-       "no-unused-vars": 0
+      "vue/no-unused-vars": 0,
+      "no-unused-vars": 0
     }
   },
   "browserslist": [
