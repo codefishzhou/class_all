@@ -3,7 +3,11 @@
     .screen
   </div>
 </template>
-
+<script>
+export default {
+    name: "screen",
+};
+</script>
 <script lang="ts" setup>
 </script>
 
